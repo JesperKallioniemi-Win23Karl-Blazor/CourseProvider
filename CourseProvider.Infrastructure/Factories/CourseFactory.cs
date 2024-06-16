@@ -40,7 +40,7 @@ public static class CourseFactory
 
                 Items = request.Content.ProgramDetails?.Select(pd => new ProgramDetailItemEntity
                 {
-                    
+                    Id = pd.Id ?? 0,
                     Title = pd.Title,
                     Description = pd.Description
                 }).ToList()

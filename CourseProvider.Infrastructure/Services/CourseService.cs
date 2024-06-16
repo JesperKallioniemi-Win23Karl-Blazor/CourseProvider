@@ -65,7 +65,7 @@ namespace CourseProvider.Infrastructure.Services
                 .Include(c => c.Authors)
                 .Include(c => c.Prices)
                 .Include(c => c.Content)
-                .Include(c => c.ProgramDetails)
+                .ThenInclude(c => c!.Items)  // Ensure we include ProgramDetails within Content
                 .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (existingCourse == null) return null!;
@@ -95,25 +95,28 @@ namespace CourseProvider.Infrastructure.Services
                 {
                     existingCourse.Content = new ContentEntity();
                 }
-                context.Entry(existingCourse.Content).CurrentValues.SetValues(request.Content);
-            }
-
-            if (request.ProgramDetails != null)
-            {
-                if (existingCourse.ProgramDetails == null)
+                else
                 {
-                    existingCourse.ProgramDetails = new ProgramDetailItemEntity();
+                    // Clear existing program details
+                    existingCourse.Content.Items?.Clear();
                 }
-                existingCourse.ProgramDetails.Title_1 = request.ProgramDetails.Title_1;
-                existingCourse.ProgramDetails.Description_1 = request.ProgramDetails.Description_1;
-                existingCourse.ProgramDetails.Title_2 = request.ProgramDetails.Title_2;
-                existingCourse.ProgramDetails.Description_2 = request.ProgramDetails.Description_2;
-                existingCourse.ProgramDetails.Title_3 = request.ProgramDetails.Title_3;
-                existingCourse.ProgramDetails.Description_3 = request.ProgramDetails.Description_3;
+
+                context.Entry(existingCourse.Content).CurrentValues.SetValues(request.Content);
+
+                if (request.Content.ProgramDetails != null)
+                {
+                    existingCourse.Content.Items?.AddRange(request.Content.ProgramDetails.Select(pd => new ProgramDetailItemEntity
+                    {
+                       
+                        Title = pd.Title,
+                        Description = pd.Description
+                    }));
+                }
             }
 
             await context.SaveChangesAsync();
             return CourseFactory.Create(existingCourse);
         }
+
     }
 }

@@ -55,12 +55,9 @@ public class ProgramDetailItemType : ObjectType<ProgramDetailItemEntity>
 {
     protected override void Configure(IObjectTypeDescriptor<ProgramDetailItemEntity> descriptor)
     {
-        descriptor.Field(p => p.Title_1).Type<StringType>();
-        descriptor.Field(p => p.Description_1).Type<StringType>();
-        descriptor.Field(p => p.Title_2).Type<StringType>();
-        descriptor.Field(p => p.Description_2).Type<StringType>();
-        descriptor.Field(p => p.Title_3).Type<StringType>();
-        descriptor.Field(p => p.Description_3).Type<StringType>();
+        descriptor.Field(p => p.Title).Type<StringType>();
+        descriptor.Field(p => p.Description).Type<StringType>();
+
     }
 }
 
