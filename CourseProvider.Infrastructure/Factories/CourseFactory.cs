@@ -1,4 +1,5 @@
-﻿using CourseProvider.Infrastructure.Data.Entities;
+﻿using Azure.Core;
+using CourseProvider.Infrastructure.Data.Entities;
 using CourseProvider.Infrastructure.Models;
 
 namespace CourseProvider.Infrastructure.Factories;
@@ -36,16 +37,18 @@ public static class CourseFactory
                 Description = request.Content.Description,
                 Includes = request.Content.Includes,
                 Learn = request.Content.Learn,
-            },
-            ProgramDetails = request.ProgramDetails == null ? null : new ProgramDetailItemEntity
-            {
-                Title_1 = request.ProgramDetails.Title_1,
-                Description_1 = request.ProgramDetails.Description_1,
-                Title_2 = request.ProgramDetails.Title_2,
-                Description_2 = request.ProgramDetails.Description_2,
-                Title_3 = request.ProgramDetails.Title_3,
-                Description_3 = request.ProgramDetails.Description_3,
+
+                Items = request.Content.ProgramDetails?.Select(pd => new ProgramDetailItemEntity
+                {
+                    
+                    Title = pd.Title,
+                    Description = pd.Description
+                }).ToList()
+
             }
+
+
+
         };
     }
 
@@ -81,16 +84,15 @@ public static class CourseFactory
                 Description = request.Content.Description,
                 Includes = request.Content.Includes,
                 Learn = request.Content.Learn,
+
+                   Items = request.Content.ProgramDetails?.Select(pd => new ProgramDetailItemEntity
+                   {
+
+                       Title = pd.Title,
+                       Description = pd.Description
+                   }).ToList()
             },
-            ProgramDetails = request.ProgramDetails == null ? null : new ProgramDetailItemEntity
-            {
-                Title_1 = request.ProgramDetails.Title_1,
-                Description_1 = request.ProgramDetails.Description_1,
-                Title_2 = request.ProgramDetails.Title_2,
-                Description_2 = request.ProgramDetails.Description_2,
-                Title_3 = request.ProgramDetails.Title_3,
-                Description_3 = request.ProgramDetails.Description_3,
-            }
+
         };
     }
 
@@ -126,16 +128,15 @@ public static class CourseFactory
                 Description = entity.Content.Description,
                 Includes = entity.Content.Includes,
                 Learn = entity.Content.Learn,
+
+                ProgramDetails = entity.Content.Items?.Select(pd => new ProgramDetailItem
+                {
+                    Id = pd.Id,
+                    Title = pd.Title,
+                    Description = pd.Description
+                }).ToList()
             },
-            ProgramDetails = entity.ProgramDetails == null ? null : new ProgramDetailItem
-            {
-                Title_1 = entity.ProgramDetails.Title_1,
-                Description_1 = entity.ProgramDetails.Description_1,
-                Title_2 = entity.ProgramDetails.Title_2,
-                Description_2 = entity.ProgramDetails.Description_2,
-                Title_3 = entity.ProgramDetails.Title_3,
-                Description_3 = entity.ProgramDetails.Description_3,
-            }
+           
         };
     }
 }

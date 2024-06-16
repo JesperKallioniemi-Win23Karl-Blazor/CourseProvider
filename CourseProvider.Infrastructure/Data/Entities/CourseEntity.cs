@@ -21,5 +21,5 @@ public class CourseEntity
     public virtual List<AuthorEntity>? Authors { get; set; }
     public virtual PricesEntity? Prices { get; set; }
     public virtual ContentEntity? Content { get; set; }
-    public virtual ProgramDetailItemEntity? ProgramDetails { get; set; }
+    public virtual List<ProgramDetailItemEntity>? ProgramDetails { get; set; }
 }

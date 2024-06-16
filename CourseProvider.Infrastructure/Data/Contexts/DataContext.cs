@@ -25,7 +25,14 @@ namespace CourseProvider.Infrastructure.Data.Contexts
             modelBuilder.Entity<CourseEntity>().OwnsOne(x => x.Prices);
             modelBuilder.Entity<CourseEntity>().OwnsMany(x => x.Authors);
             modelBuilder.Entity<CourseEntity>().OwnsOne(x => x.Content);
-            modelBuilder.Entity<CourseEntity>().OwnsOne(x => x.ProgramDetails);
+
+            modelBuilder.Entity<CourseEntity>()
+                .OwnsMany(x => x.ProgramDetails, pd =>
+                {
+                    pd.WithOwner().HasForeignKey("CourseEntityId");
+                    pd.Property<int>("Id");
+                    pd.HasKey("Id");
+                });
         }
     }
 }

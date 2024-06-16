@@ -39,14 +39,12 @@ public class ContentUpdateRequest
     public string? Description { get; set; }
     public string[]? Includes { get; set; }
     public string[]? Learn { get; set; }
+
+    public virtual List<ProgramDetailItemUpdateRequest>? ProgramDetails { get; set; }
 }
 
 public class ProgramDetailItemUpdateRequest
 {
-    public string? Title_1 { get; set; }
-    public string? Description_1 { get; set; }
-    public string? Title_2 { get; set; }
-    public string? Description_2 { get; set; }
-    public string? Title_3 { get; set; }
-    public string? Description_3 { get; set; }
+    public string? Title { get; set; }
+    public string? Description { get; set; }
 }

@@ -18,7 +18,7 @@
         public virtual PricesCreateRequest? Prices { get; set; }
         public virtual ContentCreateRequest? Content { get; set; }
         public virtual ProgramDetailItemCreateRequest? ProgramDetails { get; set; }
-    }
+}
 
     public class AuthorCreateRequest
     {
@@ -37,15 +37,14 @@
         public string? Description { get; set; }
         public string[]? Includes { get; set; }
         public string[]? Learn { get; set; }
+
+        public virtual List<ProgramDetailItemCreateRequest>? ProgramDetails { get; set; }
     }
 
     public class ProgramDetailItemCreateRequest
-    {
-        public string? Title_1 { get; set; }
-        public string? Description_1 { get; set; }
-        public string? Title_2 { get; set; }
-        public string? Description_2 { get; set; }
-        public string? Title_3 { get; set; }
-        public string? Description_3 { get; set; }
-    }
+{
+    public string? Title { get; set; }
+    public string? Description { get; set; }
+
+}
 
