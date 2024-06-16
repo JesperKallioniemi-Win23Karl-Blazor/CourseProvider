@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="hotchocolate.aspnetcore" Version="13.9.6" />
+    <PackageReference Include="hotchocolate.aspnetcore.playground" Version="10.5.5" />
+    <PackageReference Include="hotchocolate.azurefunctions" Version="13.9.6" />
+    <PackageReference Include="microsoft.entityframeworkcore.cosmos" Version="8.0.6" />
+    <PackageReference Include="microsoft.entityframeworkcore.proxies" Version="8.0.6" />
+  </ItemGroup>
+
+</Project>
